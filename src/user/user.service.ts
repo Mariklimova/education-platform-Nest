@@ -7,10 +7,23 @@ import { User } from 'src/shemas/user.shemas';
 export class UserService {
   constructor(@InjectModel('users') private userModule: Model<User>){}
   
-  getHello(): string {
-    return 'Hello World!';
-  }
   createUser(obj){
     return this.userModule.create(obj)
+  }
+
+  getAllUser() {
+    return this.userModule.find();
+  }
+
+  getByIdUser(id:number) {
+    return this.userModule.findById(id);
+  }
+
+  putUser(id:number, obj) {
+    return this.userModule.findByIdAndUpdate(id,obj);
+  }
+
+  deleteUser(id:number) {
+    return this.userModule.findByIdAndDelete(id);
   }
 }
