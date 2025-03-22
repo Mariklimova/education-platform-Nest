@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from 'src/shemas/user.shemas';
+import { User } from 'src/shemas/user.shema';
+import { BodyDto } from './user.dto';
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel('users') private userModule: Model<User>){}
   
-  createUser(obj){
+  createUser(obj:BodyDto){
     return this.userModule.create(obj)
   }
 
@@ -19,7 +20,7 @@ export class UserService {
     return this.userModule.findById(id);
   }
 
-  putUser(id:number, obj) {
+  putUser(id:number, obj:BodyDto) {
     return this.userModule.findByIdAndUpdate(id,obj);
   }
 
