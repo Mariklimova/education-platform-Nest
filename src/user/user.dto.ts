@@ -1,7 +1,7 @@
 import { IsString, MinLength, IsInt, Min, Max } from "class-validator";
 
 
-export class BodyDto {
+export class BodyDtoUser {
     @IsString()
     name: string;
     pasword: string;

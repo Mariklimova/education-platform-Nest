@@ -1,12 +1,32 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put, Delete } from '@nestjs/common';
 import { CourseService } from './course.service';
+import { BodyDtoCourse } from './course.dto';
 
-@Controller()
+@Controller('/course')
 export class CourseController {
-  constructor(private readonly appService: CourseService) {}
+  constructor(private readonly courseService: CourseService) { }
 
+  @Post()
+  async createCourse(@Body() obj: BodyDtoCourse) {
+    return await this.courseService.createCourse(obj);
+  }
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async getAllUser() {
+    return await this.courseService.getAllCourse();
+  }
+
+  @Get('/:id')
+  async getByIdCourse(@Param('id')id:number) {
+    return await this.courseService.getByIdCourse(id);
+  }
+
+  @Put('/:id')
+  async putCourse(@Param('id')id:number, @Body() obj:BodyDtoCourse) {
+    return await this.courseService.putCourse(id,obj);
+  }
+
+  @Delete('/:id')
+  async deleteCourse(@Param('id')id:number) {
+    return await this.courseService.deleteCourse(id);
   }
 }
