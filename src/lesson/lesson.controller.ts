@@ -1,12 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post,Body } from '@nestjs/common';
 import { LessonService } from './lesson.service';
+import { BodyDtoLesson } from './lesson.dto';
 
-@Controller()
+@Controller('/lesson')
 export class LessonController {
-  constructor(private readonly appService: LessonService) {}
+  constructor(private readonly lessonService: LessonService) {}
 
+  @Post()
+  async createLesson(@Body() obj:BodyDtoLesson) {
+    return await this.lessonService.createLesson(obj);
+  }
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async getAllLesson() {
+    return await this.lessonService.getAllLesson();
   }
 }
