@@ -15,5 +15,17 @@ export class LessonService {
   getAllLesson() {
     return this.lessonModel.find()
   }
+
+  getByIdLesson(id: number) {
+    return this.lessonModel.findById(id)
+  }
+
+  putLesson(id: number, obj: BodyDtoLesson) {
+    return this.lessonModel.findByIdAndUpdate(id, obj)
+  }
+
+  deleteLesson(id: number) {
+    return this.lessonModel.findByIdAndDelete(id)
+  }
 }
 
